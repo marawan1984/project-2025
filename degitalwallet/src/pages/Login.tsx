@@ -1,14 +1,13 @@
 import { Password } from "@mui/icons-material";
 import { Paper } from "@mui/material";
 import { TextField } from "@mui/material";
-import { Button } from "@mui/material"
+import { Button } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
 
-const Login = () => {
+const Login = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
   const [message, setMessage] = useState("");
 
   const onClick = async () => {
@@ -32,7 +31,7 @@ const Login = () => {
 
       if (result.status === 200) {
         setMessage("Login Successful");
-        setLoggedIn(true);
+        onLoginSuccess();
       }
     } catch (error) {
       setMessage("Login Failed");
@@ -54,23 +53,27 @@ const Login = () => {
         </div>
         <div>
           <TextField
-            id="outlined-basic"
-            label="Outlined"
+            id="outlined-password-input"
+            label="Password"
+            type="password"
+            autoComplete="current-password"
             variant="outlined"
             value={password}
-            type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div>
           <Button variant="contained" onClick={onClick}>
-            Contained
+            Login
           </Button>
         </div>
+        <div>
+          <p>{message}</p>
+        </div>
       </Paper>
-      <div>{loggedIn && <h2>{message}</h2>}</div>
     </div>
   );
 };
+
 
 export default Login;

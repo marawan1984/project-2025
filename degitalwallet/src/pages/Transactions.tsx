@@ -16,12 +16,17 @@ const Transactionchoise = () => {
 
   return (
     <div>
+      <br/>
       <button onClick={() => setVisible(!visible)}>
         {visible ? "Close" : "Transactions"}
       </button>
 
       {visible && <>
+      <br/>
+      <br/>
       <Link to="/Withdraw">Withdraw </Link>
+      <br/>
+      <br/>
       <Link to="/Deposit">Deposit </Link>
       </>
    }
